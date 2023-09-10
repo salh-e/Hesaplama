@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ExchangeRates _$ExchangeRatesFromJson(Map<String, dynamic> json) {
-  return _ExchangeRates.fromJson(json);
+RatesModel _$RatesModelFromJson(Map<String, dynamic> json) {
+  return _RatesModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ExchangeRates {
+mixin _$RatesModel {
   bool get success => throw _privateConstructorUsedError;
   int get timestamp => throw _privateConstructorUsedError;
   String get base => throw _privateConstructorUsedError;
@@ -28,15 +28,15 @@ mixin _$ExchangeRates {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ExchangeRatesCopyWith<ExchangeRates> get copyWith =>
+  $RatesModelCopyWith<RatesModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ExchangeRatesCopyWith<$Res> {
-  factory $ExchangeRatesCopyWith(
-          ExchangeRates value, $Res Function(ExchangeRates) then) =
-      _$ExchangeRatesCopyWithImpl<$Res, ExchangeRates>;
+abstract class $RatesModelCopyWith<$Res> {
+  factory $RatesModelCopyWith(
+          RatesModel value, $Res Function(RatesModel) then) =
+      _$RatesModelCopyWithImpl<$Res, RatesModel>;
   @useResult
   $Res call(
       {bool success,
@@ -47,9 +47,9 @@ abstract class $ExchangeRatesCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ExchangeRatesCopyWithImpl<$Res, $Val extends ExchangeRates>
-    implements $ExchangeRatesCopyWith<$Res> {
-  _$ExchangeRatesCopyWithImpl(this._value, this._then);
+class _$RatesModelCopyWithImpl<$Res, $Val extends RatesModel>
+    implements $RatesModelCopyWith<$Res> {
+  _$RatesModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -91,11 +91,11 @@ class _$ExchangeRatesCopyWithImpl<$Res, $Val extends ExchangeRates>
 }
 
 /// @nodoc
-abstract class _$$_ExchangeRatesCopyWith<$Res>
-    implements $ExchangeRatesCopyWith<$Res> {
-  factory _$$_ExchangeRatesCopyWith(
-          _$_ExchangeRates value, $Res Function(_$_ExchangeRates) then) =
-      __$$_ExchangeRatesCopyWithImpl<$Res>;
+abstract class _$$_RatesModelCopyWith<$Res>
+    implements $RatesModelCopyWith<$Res> {
+  factory _$$_RatesModelCopyWith(
+          _$_RatesModel value, $Res Function(_$_RatesModel) then) =
+      __$$_RatesModelCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,11 +107,11 @@ abstract class _$$_ExchangeRatesCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ExchangeRatesCopyWithImpl<$Res>
-    extends _$ExchangeRatesCopyWithImpl<$Res, _$_ExchangeRates>
-    implements _$$_ExchangeRatesCopyWith<$Res> {
-  __$$_ExchangeRatesCopyWithImpl(
-      _$_ExchangeRates _value, $Res Function(_$_ExchangeRates) _then)
+class __$$_RatesModelCopyWithImpl<$Res>
+    extends _$RatesModelCopyWithImpl<$Res, _$_RatesModel>
+    implements _$$_RatesModelCopyWith<$Res> {
+  __$$_RatesModelCopyWithImpl(
+      _$_RatesModel _value, $Res Function(_$_RatesModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -123,7 +123,7 @@ class __$$_ExchangeRatesCopyWithImpl<$Res>
     Object? date = null,
     Object? rates = null,
   }) {
-    return _then(_$_ExchangeRates(
+    return _then(_$_RatesModel(
       success: null == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
@@ -150,8 +150,8 @@ class __$$_ExchangeRatesCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ExchangeRates implements _ExchangeRates {
-  _$_ExchangeRates(
+class _$_RatesModel implements _RatesModel {
+  _$_RatesModel(
       {required this.success,
       required this.timestamp,
       required this.base,
@@ -159,8 +159,8 @@ class _$_ExchangeRates implements _ExchangeRates {
       required final Map<String, double> rates})
       : _rates = rates;
 
-  factory _$_ExchangeRates.fromJson(Map<String, dynamic> json) =>
-      _$$_ExchangeRatesFromJson(json);
+  factory _$_RatesModel.fromJson(Map<String, dynamic> json) =>
+      _$$_RatesModelFromJson(json);
 
   @override
   final bool success;
@@ -180,14 +180,14 @@ class _$_ExchangeRates implements _ExchangeRates {
 
   @override
   String toString() {
-    return 'ExchangeRates(success: $success, timestamp: $timestamp, base: $base, date: $date, rates: $rates)';
+    return 'RatesModel(success: $success, timestamp: $timestamp, base: $base, date: $date, rates: $rates)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ExchangeRates &&
+            other is _$_RatesModel &&
             (identical(other.success, success) || other.success == success) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
@@ -204,27 +204,27 @@ class _$_ExchangeRates implements _ExchangeRates {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ExchangeRatesCopyWith<_$_ExchangeRates> get copyWith =>
-      __$$_ExchangeRatesCopyWithImpl<_$_ExchangeRates>(this, _$identity);
+  _$$_RatesModelCopyWith<_$_RatesModel> get copyWith =>
+      __$$_RatesModelCopyWithImpl<_$_RatesModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ExchangeRatesToJson(
+    return _$$_RatesModelToJson(
       this,
     );
   }
 }
 
-abstract class _ExchangeRates implements ExchangeRates {
-  factory _ExchangeRates(
+abstract class _RatesModel implements RatesModel {
+  factory _RatesModel(
       {required final bool success,
       required final int timestamp,
       required final String base,
       required final String date,
-      required final Map<String, double> rates}) = _$_ExchangeRates;
+      required final Map<String, double> rates}) = _$_RatesModel;
 
-  factory _ExchangeRates.fromJson(Map<String, dynamic> json) =
-      _$_ExchangeRates.fromJson;
+  factory _RatesModel.fromJson(Map<String, dynamic> json) =
+      _$_RatesModel.fromJson;
 
   @override
   bool get success;
@@ -238,6 +238,6 @@ abstract class _ExchangeRates implements ExchangeRates {
   Map<String, double> get rates;
   @override
   @JsonKey(ignore: true)
-  _$$_ExchangeRatesCopyWith<_$_ExchangeRates> get copyWith =>
+  _$$_RatesModelCopyWith<_$_RatesModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

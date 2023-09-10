@@ -6,8 +6,8 @@ part of 'exchange_rates_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ExchangeRates _$$_ExchangeRatesFromJson(Map<String, dynamic> json) =>
-    _$_ExchangeRates(
+_$_RatesModel _$$_RatesModelFromJson(Map<String, dynamic> json) =>
+    _$_RatesModel(
       success: json['success'] as bool,
       timestamp: json['timestamp'] as int,
       base: json['base'] as String,
@@ -17,7 +17,7 @@ _$_ExchangeRates _$$_ExchangeRatesFromJson(Map<String, dynamic> json) =>
       ),
     );
 
-Map<String, dynamic> _$$_ExchangeRatesToJson(_$_ExchangeRates instance) =>
+Map<String, dynamic> _$$_RatesModelToJson(_$_RatesModel instance) =>
     <String, dynamic>{
       'success': instance.success,
       'timestamp': instance.timestamp,
