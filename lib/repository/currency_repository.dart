@@ -1,14 +1,16 @@
 import 'dart:convert';
+import 'package:currency_converter/constants/endpoints.dart';
 import 'package:currency_converter/model/currency_model.dart';
 import 'package:http/http.dart';
 
 class CurrencyRepository {
   final client = Client();
-  final baseUrl = 'https://api.exchangeratesapi.io/v1/';
+  final baseUrl = Endpoints.baseUrl;
+  final accessKey = Endpoints.accessKey;
 
   Future<Map<String, dynamic>> getCurrencySymbols() async {
     final response = await client.get(Uri.parse(
-        baseUrl + 'symbols?access_key=766f6d9374dff8b54dc0715b513b385c'));
+        '${baseUrl}symbols?access_key=766f6d9374dff8b54dc0715b513b385c'));
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
       Map<String, dynamic> data = json['symbols'];
