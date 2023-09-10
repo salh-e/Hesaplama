@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:currency_converter/constant.dart';
+import 'package:currency_converter/constants/endpoints.dart';
 import 'package:currency_converter/model/currency_response_model.dart';
+import 'package:currency_converter/model/exchange_rates_model.dart';
 import 'package:currency_converter/screen/currency_screen.dart';
 import 'package:currency_converter/widget/custom_textfield.dart';
 import 'package:currency_converter/widget/rate_text_widget.dart';
@@ -70,6 +72,17 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Future<RatesModel> getExchangeRate(String base, List<String> symbols) async {
+    final response = await client.get(Uri.parse(
+        '${Endpoints.baseUrl}latest?access_key=${Endpoints.accessKey}&base=$base&symbols=${symbols.join(",")}&format=1'));
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      return RatesModel.fromJson(json);
+    } else {
+      throw Exception('Unable to get data');
+    }
+  }
+
   // ...
 
   @override
@@ -84,8 +97,6 @@ class _HomeScreenState extends State<HomeScreen> {
         return false;
       }
     }
-
-    ;
 
     final amountController1 = TextEditingController();
     final amountController2 = TextEditingController();
@@ -152,51 +163,49 @@ class _HomeScreenState extends State<HomeScreen> {
                 key: key,
                 child: Column(
                   children: [
-                    Container(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: CustomTextfield(
-                              keyboardType: TextInputType.number,
-                              textStyle: style.copyWith(color: Colors.black),
-                              hintText: '25',
-                              validator: (val) =>
-                                  val!.isEmpty ? 'enter value' : null,
-                              controller: amountController,
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  // Metni sil
-                                  amountController.clear();
-                                },
-                                icon: const Icon(Icons.clear),
-                              ),
-                            ),
-                          ),
-                          CustomTextfield(
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomTextfield(
+                            keyboardType: TextInputType.number,
                             textStyle: style.copyWith(color: Colors.black),
-                            hintText: 'Convert from',
-                            controller: fromController,
+                            hintText: '25',
                             validator: (val) =>
                                 val!.isEmpty ? 'enter value' : null,
-                            readOnly: true,
-                            onTap: () async {
-                              final result = await Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (ctx) => const CurrencyScreen(),
-                                ),
-                              );
-
-                              setState(() {
-                                if (result == null || result == 0) {
-                                  fromController.text = "";
-                                } else {
-                                  fromController.text = result.toString();
-                                }
-                              });
-                            },
+                            controller: amountController,
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                // Metni sil
+                                amountController.clear();
+                              },
+                              icon: const Icon(Icons.clear),
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                        CustomTextfield(
+                          textStyle: style.copyWith(color: Colors.black),
+                          hintText: 'Convert from',
+                          controller: fromController,
+                          validator: (val) =>
+                              val!.isEmpty ? 'enter value' : null,
+                          readOnly: true,
+                          onTap: () async {
+                            final result = await Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (ctx) => const CurrencyScreen(),
+                              ),
+                            );
+
+                            setState(() {
+                              if (result == null || result == 0) {
+                                fromController.text = "";
+                              } else {
+                                fromController.text = result.toString();
+                              }
+                            });
+                          },
+                        ),
+                      ],
                     ),
                     Container(
                       child: Row(
@@ -234,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Expanded(
                             child:
-                                RateTextWidget(value: rate.toStringAsFixed(2)),
+                                RateTextWidget(value: rate2.toStringAsFixed(2)),
                           ),
                           CustomTextfield(
                             textStyle: style.copyWith(color: Colors.black),
@@ -262,13 +271,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Container(
                       child: MaterialButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (key.currentState!.validate()) {
                             getCurrencyConversionRate(
                               amount: num.parse(amountController.text),
                               convertFrom: fromController.text,
                               convertTo: toController.text,
                             );
+                            final RatesModel ratesModel = await getExchangeRate(
+                                fromController.text,
+                                [toController.text, toController2.text]);
+                            debugPrint(
+                                "Base: ${ratesModel.base} Rates: ${ratesModel.rates}");
+                            setState(() {
+                              rate = ratesModel.rates[toController.text]! * num.parse(amountController.text);
+                              rate2 = ratesModel.rates[toController2.text]! * num.parse(amountController.text);
+                            });
                           }
                         },
                         shape: OutlineInputBorder(

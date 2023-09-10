@@ -1,4 +1,5 @@
 import 'package:currency_converter/model/currency_model.dart';
+import 'package:currency_converter/model/exchange_rates_model.dart';
 import 'package:currency_converter/repository/currency_repository.dart';
 
 class CurrencyProvider {
@@ -12,5 +13,10 @@ class CurrencyProvider {
 
   static Future<Map<String, dynamic>> getCurrencySymbols() async {
     return await repository.getCurrencySymbols();
+  }
+
+  static Future<RatesModel> getExchangeRate(
+      String base, List<String> symbols) async {
+    return await repository.getExchangeRate(base, symbols);
   }
 }

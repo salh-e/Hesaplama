@@ -1,3 +1,4 @@
+//TODO: Refactor this model to use the new json_serializable package
 class CurrencyModel {
   bool? success;
   int? timestamp;

@@ -1,78 +1,42 @@
-class CurrencyResponseModel {
-  bool? success;
-  Query? query;
-  Info? info;
-  String? date;
-  double? result;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  CurrencyResponseModel({
-    this.success,
-    this.query,
-    this.info,
-    this.date,
-    this.result,
-  });
+part 'currency_response_model.freezed.dart';
+part 'currency_response_model.g.dart';
 
-  CurrencyResponseModel.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    query = json['query'] != null ? Query.fromJson(json['query']) : null;
-    info = json['info'] != null ? Info.fromJson(json['info']) : null;
-    date = json['date'];
-    result = json['result'];
-  }
+@freezed
+class CurrencyResponseModel with _$CurrencyResponseModel {
+  factory CurrencyResponseModel({
+    bool? success,
+    Query? query,
+    Info? info,
+    String? date,
+    double? result,
+  }) = _CurrencyResponseModel;
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['success'] = success;
-    if (query != null) {
-      data['query'] = query!.toJson();
-    }
-    if (info != null) {
-      data['info'] = info!.toJson();
-    }
-    data['date'] = date;
-    data['result'] = result;
-    return data;
-  }
+  factory CurrencyResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$CurrencyResponseModelFromJson(json);
 }
 
-class Query {
-  String? from;
-  String? to;
-  String? amount;
 
-  Query({this.from, this.to, this.amount});
 
-  Query.fromJson(Map<String, dynamic> json) {
-    from = json['from'];
-    to = json['to'];
-    amount = json['amount'].toString();
-  }
+@freezed
+class Query with _$Query {
+  factory Query({
+    String? from,
+    String? to,
+    double? amount,
+  }) = _Query;
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['from'] = from;
-    data['to'] = to;
-    data['amount'] = amount;
-    return data;
-  }
+  factory Query.fromJson(Map<String, dynamic> json) => _$QueryFromJson(json);
 }
 
-class Info {
-  String? timestamp;
-  double? rate;
+@freezed
+class Info with _$Info {
+  factory Info({
+    String? timestamp,
+    double? rate,
+  }) = _Info;
 
-  Info({this.timestamp, this.rate});
-
-  Info.fromJson(Map<String, dynamic> json) {
-    timestamp = json['timestamp'].toString();
-    rate = json['rate'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['timestamp'] = timestamp;
-    data['rate'] = rate;
-    return data;
-  }
+  factory Info.fromJson(Map<String, dynamic> json) => _$InfoFromJson(json);
 }
+
